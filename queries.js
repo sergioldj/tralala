@@ -1,15 +1,15 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'nyukjhaufopvle',
-  host: 'ec2-174-129-253-27.compute-1.amazonaws.com',
-  database: 'dov20jmj6edd7',
-  password: 'bd5660571a1eb04839f0330c5d351c2fd28b065dd519421c05a79acadf69f9e4',
+  user: 'pwmkuvvqjymjno',
+  host: 'ec2-23-23-164-251.compute-1.amazonaws.com',
+  database: 'dc70o74a8h7i39',
+  password: 'e2a1f5c4f786598785c772a729ef2bb2b27d36fcf98c2b669067e7d0246466ae',
   port: 5432,
 })
 
 
 const getUsers = (request, response) => {
-  pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+  pool.query('SELECT * FROM usuario', (error, results) => {
     if (error) {
       throw error
     }
@@ -20,7 +20,7 @@ const getUsers = (request, response) => {
 const getTrabalho = (request, response) => {
   const idTrabalho = parseInt(request.params.idTrabalho)
 
-  pool.query('SELECT * FROM trabalho WHERE id_trabalho = $1', [idTrabalho], (error, results) => {
+  pool.query('SELECT * FROM usuario WHERE id_trabalho = $1', [idTrabalho], (error, results) => {
     if (error) {
       throw error
     }
@@ -52,7 +52,7 @@ const updateTrabalho = (request, response) => {
 const getUserById = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM usuario WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -61,9 +61,9 @@ const getUserById = (request, response) => {
 }
 
 const createUser = (request, response) => {
-  const { id, name, email } = request.body
+  const { id, nome, cpf } = request.body
 
-  pool.query('INSERT INTO users (id, name, email) VALUES ($1, $2, $3)', [id, name, email], (error, results) => {
+  pool.query('INSERT INTO usuario (id, nome, cpf) VALUES ($1, $2, $3)', [id, nome, cpf], (error, results) => {
     if (error) {
       throw error
     }
